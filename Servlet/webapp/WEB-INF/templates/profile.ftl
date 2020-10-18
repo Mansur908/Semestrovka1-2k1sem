@@ -25,7 +25,7 @@
 </head>
 <body class="main">
 <form method="post" action="/profile">
-    <input type="submit" value="Hello" class="enter"/>
+    <input type="submit" value="exit" name="exit" class="enter"/>
 </form>
 </body>
 </html>

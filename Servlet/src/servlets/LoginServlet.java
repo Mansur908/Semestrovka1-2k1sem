@@ -1,6 +1,7 @@
 package servlets;
 
 import models.User;
+import repositories.Singleton;
 import repositories.UsersRepository;
 import repositories.UsersRepositoryJdbcImpl;
 import services.Helper;
@@ -33,50 +34,59 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        String reg = req.getParameter("reg");
-//        boolean result = loginService.login(username, password);
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> root = new HashMap<>();
         User user = usersRepository.findByUsrername(username);
-                if(user != null && user.getPassword().equals(password)){
-                    root.put("name", username);
-                    HttpSession session = req.getSession();
-                    session.setAttribute("user",username);
-                    req.getServletContext().getRequestDispatcher("/profile").forward(req,resp);
-                    // исправить,добавить root
-                }
-                if (user != null && !(user.getPassword().equals(password))){
-                    root.put("message","incorrect password");
-                    helper.render(req, resp, "login.ftl", root);
-                }
-                if (user == null){
-                    root.put("message","User not found");
-                    helper.render(req, resp, "login.ftl", root);
-                }
+        if(user != null && user.getPassword().equals(password)){
+            root.put("name", username);
+            Cookie cookie = new Cookie("username",username);
+            resp.addCookie(cookie);
+            HttpSession session = req.getSession();
+            session.setAttribute("user",username);
+            helper.render(req, resp, "profile.ftl", root);
+            // исправить,добавить root
+        }
+        if (user != null && !(user.getPassword().equals(password))){
+            root.put("message","incorrect password");
+            helper.render(req, resp, "login.ftl", root);
+        }
+        if (user == null){
+            root.put("message","User not found");
+            helper.render(req, resp, "login.ftl", root);
+        }
         }
 
     private Connection connection;
     private UsersRepository usersRepository;
     @Override
-    public void init() throws ServletException {
+    public void init() {
         helper = new Helper();
         loginService = new LoginService();
 
         try{
-            String dbUrl ="jdbc:postgresql://localhost:5432/sem1";
-            String dbUsername="postgres";
-            String dbPassword ="mansur1213";
-            String driverClassName ="org.postgresql.Driver";
-
-            Class.forName(driverClassName);
-            connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-
+            Connection connection = Singleton.getSingleton().doSinglton();
             usersRepository = new UsersRepositoryJdbcImpl(connection);
-
         } catch (SQLException | ClassNotFoundException e) {
             throw new IllegalStateException(e);
         }
+
+
+
+//        try{
+//            String dbUrl ="jdbc:postgresql://localhost:5432/sem1";
+//            String dbUsername="postgres";
+//            String dbPassword ="mansur1213";
+//            String driverClassName ="org.postgresql.Driver";
+//
+//            Class.forName(driverClassName);
+//            connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+//
+//            usersRepository = new UsersRepositoryJdbcImpl(connection);
+//
+//        } catch (SQLException | ClassNotFoundException e) {
+//            throw new IllegalStateException(e);
+//        }
     }
 
 }

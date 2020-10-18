@@ -69,6 +69,7 @@
         <input type="text" name="username" placeholder="enter login" class="name"/>
         <input type="password" name="password" placeholder="enter password" class="password"/>
         <input type="submit" value="ENTER" class="enter"/>
+
 <#--        <a href="http://localhost:8080/login">-->
 <#--            <button type="button" class="enter">ENTER</button>-->
 <#--        </a>-->
