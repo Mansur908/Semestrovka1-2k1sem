@@ -1,10 +1,7 @@
 package models;
 
-import lombok.Builder;
-
 import java.util.Objects;
 
-@Builder
 public class User {
     @Override
     public boolean equals(Object o) {

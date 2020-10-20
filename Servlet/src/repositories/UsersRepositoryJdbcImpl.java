@@ -22,13 +22,15 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     //language=SQL
     private static final String SQL_INSERT_USER = "INSERT INTO users (username,password) VALUES (?, ?)";
 
-//    private DataSource dataSource;
+    //language=SQL
+    private static final String SQL_UPDATE_USER = "UPDATE users SET password = (?) " +
+            "WHERE password = (SELECT password FROM users WHERE password = ? AND username = ?) AND " +
+            "username = (SELECT username FROM users WHERE username = ?) returning id,username, password";
+
+
+
 public UsersRepositoryJdbcImpl(Connection connection){
     this.connection = connection;
-//        try {
-//        } catch (SQLException e) {
-//            throw new IllegalStateException(e);
-//        }
 }
 
     private Connection connection;
@@ -73,7 +75,7 @@ public UsersRepositoryJdbcImpl(Connection connection){
     }
 
     @Override
-    public User findByUsrername(String username) {
+    public User findByUsername(String username) {
         try {
             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_USERNAME);
             statement.setString(1,username);
@@ -107,6 +109,25 @@ public UsersRepositoryJdbcImpl(Connection connection){
     }
 
     @Override
+    public User changePassword(String newPassword,String oldPassword,String username) throws IllegalStateException {
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_USER);
+            statement.setString(1, newPassword);
+            statement.setString(2, oldPassword);
+            statement.setString(3, username);
+            statement.setString(4, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                return new User(id, username, newPassword);
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        return null;
+    }
+
+    @Override
     public void safe(User entity) {
 
     }
@@ -126,48 +147,3 @@ public UsersRepositoryJdbcImpl(Connection connection){
 
     }
 }
-
-
-//    @Override
-//    public List<User> findAll() {
-//        Connection connection = null;
-//        PreparedStatement statement = null;
-//        ResultSet resultSet = null;
-//
-//        try {
-//            connection = dataSource.getConnection();
-//            statement = connection.prepareStatement(SQL_SELECT);
-////            statement.setInt();
-//            resultSet = statement.executeQuery();
-//
-//            List<User> users = new ArrayList<>();
-//            while (resultSet.next()){
-//                User user = new User(
-//                        resultSet.getLong("id"),
-//                        resultSet.getString("username"),
-//                        resultSet.getString("password"));
-//                users.add(user);
-//            }
-//
-//            return users;
-//
-//        }catch (SQLException e){
-//            throw new IllegalStateException(e);
-//        }finally {
-//            if(resultSet != null){
-//                try {
-//                    resultSet.close();
-//                }catch (SQLException ignore ){}
-//            }
-//            if (statement != null){
-//                try {
-//                    statement.close();
-//                }catch (SQLException ignore){}
-//            }
-//            if (connection != null){
-//                try {
-//                    connection.close();
-//                }catch (SQLException ignore){}
-//            }
-//        }
-//    }

@@ -2,11 +2,11 @@ package repositories;
 
 import models.User;
 
-import java.util.Optional;
-
 public interface UsersRepository extends CrudRepository<User>{
 
-    User findByUsrername(String username);
-    User insertUser (String username,String password);
+    User findByUsername(String username);
+    User insertUser(String username,String password);
+    User changePassword(String newPassord,String oldPassword,String username) throws IllegalStateException;
+
 
 }

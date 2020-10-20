@@ -26,16 +26,17 @@ public class ProfileServlet extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> root = new HashMap<>();
-//        root.put("name",username);
-//        helper.render(req, resp, "profile.ftl", root);
-        if (exit.equals("exit")){
-            HttpSession session = req.getSession(false);
-            session.removeAttribute("username");
+        if (exit.equals("exit")) {
+            if (req.getSession(false) != null) {
+                if (req.getSession(false).getAttribute("username") != null) {
+                    HttpSession session = req.getSession(false);
+                    session.removeAttribute("username");
+                }
+            }
             Cookie cookie = new Cookie("username","");
             cookie.setMaxAge(0);
             resp.addCookie(cookie);
             helper.render(req, resp, "login.ftl",new HashMap<>());
-//            req.getRequestDispatcher("/login").forward(req,resp);
         }
     }
 

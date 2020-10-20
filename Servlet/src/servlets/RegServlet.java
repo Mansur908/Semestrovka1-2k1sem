@@ -34,7 +34,7 @@ public class RegServlet extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> root = new HashMap<>();
-        User user = usersRepository.findByUsrername(username);
+        User user = usersRepository.findByUsername(username);
         if (user == null) {
             root.put("message", "You are reristered");
             helper.render(req, resp, "login.ftl", root);

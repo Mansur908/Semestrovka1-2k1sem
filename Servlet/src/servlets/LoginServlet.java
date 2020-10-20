@@ -37,13 +37,14 @@ public class LoginServlet extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> root = new HashMap<>();
-        User user = usersRepository.findByUsrername(username);
+        User user = usersRepository.findByUsername(username);
         if(user != null && user.getPassword().equals(password)){
             root.put("name", username);
             Cookie cookie = new Cookie("username",username);
+            cookie.setMaxAge(40000000);
             resp.addCookie(cookie);
             HttpSession session = req.getSession();
-            session.setAttribute("user",username);
+            session.setAttribute("username",username);
             helper.render(req, resp, "profile.ftl", root);
             // исправить,добавить root
         }
@@ -70,23 +71,6 @@ public class LoginServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException e) {
             throw new IllegalStateException(e);
         }
-
-
-
-//        try{
-//            String dbUrl ="jdbc:postgresql://localhost:5432/sem1";
-//            String dbUsername="postgres";
-//            String dbPassword ="mansur1213";
-//            String driverClassName ="org.postgresql.Driver";
-//
-//            Class.forName(driverClassName);
-//            connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-//
-//            usersRepository = new UsersRepositoryJdbcImpl(connection);
-//
-//        } catch (SQLException | ClassNotFoundException e) {
-//            throw new IllegalStateException(e);
-//        }
     }
 
 }

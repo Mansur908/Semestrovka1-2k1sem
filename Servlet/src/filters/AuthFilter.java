@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
 
 @WebFilter("/profile")
 public class AuthFilter implements Filter {
@@ -34,7 +33,7 @@ public class AuthFilter implements Filter {
         filterChain.doFilter(request,response);
     }
 
-    public String getCookieValue(Cookie [] a){
+    public static String getCookieValue(Cookie [] a){
         String str = null;
             for (Cookie c : a) {
                 if (c.getName().equals("username")) {
