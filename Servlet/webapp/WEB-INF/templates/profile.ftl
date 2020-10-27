@@ -3,6 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Hello!</title>
     <style>
         .main{
@@ -42,5 +46,27 @@
     </a>
     <input type="submit" value="exit" name="exit" class="exit"/>
 </form>
+
+<p><input id="query" />
+    <input type="submit" onclick="f()"/>
+</p>
+<div id="res"></div>
+<script type="application/javascript">
+    function f() {
+        // if ($("#query").val().length >= 1) {
+        $.ajax({
+            url: "/ticket",
+            data: {"query": $("#query").val()},
+            dataType: "json",
+            success: function (msg) {
+                $("#res").html("");
+                $("#res").append("<li>" + msg + "</li>");
+            },
+            error: function (err) {
+                $("#res").append("<li>" + "ERROR" + "</li>");
+            }
+        })
+    }
+</script>
 </body>
 </html>

@@ -29,9 +29,9 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
 
 
 
-public UsersRepositoryJdbcImpl(Connection connection){
-    this.connection = connection;
-}
+    public UsersRepositoryJdbcImpl(Connection connection){
+        this.connection = connection;
+    }
 
     private Connection connection;
 

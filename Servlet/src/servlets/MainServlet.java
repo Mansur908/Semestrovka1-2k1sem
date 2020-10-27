@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 
 @WebServlet("/main")
@@ -21,20 +20,6 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         helper.render(req, resp, "main.ftl",new HashMap<>());
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String start = req.getParameter("start");
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        Map<String, Object> root = new HashMap<>();
-        if (start != null){
-            helper.render(req, resp, "login.ftl", root);
-        }
-        else {
-            helper.render(req, resp, "registration.ftl", root);
-        }
     }
 
     @Override

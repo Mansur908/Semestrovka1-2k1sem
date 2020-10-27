@@ -8,19 +8,24 @@
     <style>
         .main{
             margin:0px 0px;
-            width:100%;
-            height:100%;
-            background-color:#0c73fe;
+            background:linear-gradient(100deg,#cc2b5e,#753a88);
+            background-size:100%;
         }
-        .block{
-            margin:170px 500px;
-            width:300px;
-            height:230px;
-            border-radius:10px;
+        .head{
+            margin:100px 0px 0px 0px;
+            text-align:center;
+            color:#ffffff;
+        }
+        .head1{
+            margin:130px 0px;
+            text-align:center;
+            color:#ffffff;
         }
         .start{
             text-align:center;
-            margin:0px 0px;
+            position:absolute;
+            left:38%;
+            top:210px;
             width:300px;
             height:115px;
             border:transparent;
@@ -43,9 +48,12 @@
     <p>${message}</p>
 </#if>
     <form method="post" action="/main">
-        <div class="block">
-            <input type="submit" name="start" value="START" class="start"/>
-        </div>
+        <h1  class = "head"><big><big><big><big>Поиск авиабилетов</big></big></big></big></h1>
+<#--        <input type="submit" name="start" value="SIGN IN" class="start"/>-->
+        <a href="http://localhost:8080/login">
+            <button type="button" class="start">SIGN IN</button>
+        </a>
+        <h1  class = "head1"><br >Мы не продаём авиабилеты,<br/>а помогаем найти самые дешевые. Бесплатно.</h1>
     </form>
 </body>
 </html>

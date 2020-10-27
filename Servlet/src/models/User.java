@@ -17,6 +17,15 @@ public class User {
         return Objects.hash(getUsername(), getPassword());
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
     private Long id;
     private String username;
     private String password;
