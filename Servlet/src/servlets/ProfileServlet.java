@@ -1,5 +1,6 @@
 package servlets;
 
+import filters.AuthFilter;
 import services.Helper;
 import services.LoginService;
 
@@ -16,7 +17,18 @@ public class ProfileServlet extends HttpServlet {
     private LoginService loginService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        helper.render(req, resp, "profile.ftl",new HashMap<>());
+        Map<String, Object> root = new HashMap<>();
+        Cookie[] cookie = req.getCookies();
+        String user = null;
+        if (cookie != null) {
+            user = AuthFilter.getCookieValue(cookie);
+        }
+        if (user != null) {
+            if (user.equals("123")) {
+                root.put("message", "m");
+            }
+        }
+        helper.render(req, resp, "profile.ftl",root);
     }
 
     @Override

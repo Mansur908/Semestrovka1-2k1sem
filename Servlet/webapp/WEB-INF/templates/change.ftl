@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>registration</title>
+    <title>Change password</title>
     <style>
         .main{
             margin:0px 0px;

@@ -24,14 +24,13 @@ public class TicketsServlet extends HttpServlet {
 //    private ObjectMapper objectMapper;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        helper.render(req, resp, "tickets.ftl", new HashMap<>());
         ObjectMapper objectMapper = new ObjectMapper();
         String query = req.getParameter("query");
         String query1 = req.getParameter("query1");
-        List<Ticket> tickets =  ticketRepository.findByPlaces(query,query1);
-        System.out.println(tickets);
+        String query2 = req.getParameter("query2");
+        List<Ticket> tickets =  ticketRepository.findByPlaces(query,query1,query2);
         String result = objectMapper.writeValueAsString(tickets);
-//        resp.setStatus(200);
+        resp.setStatus(200);
         resp.getWriter().write(result);
     }
 

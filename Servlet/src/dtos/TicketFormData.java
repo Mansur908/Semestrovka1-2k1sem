@@ -8,6 +8,9 @@ public class TicketFormData {
     private String company;
     private String departureTime;
     private String arrivalTime;
+    private String day;
+    private String price;
+    private String link;
 
     public Long getId() {
         return id;
@@ -55,5 +58,29 @@ public class TicketFormData {
 
     public void setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

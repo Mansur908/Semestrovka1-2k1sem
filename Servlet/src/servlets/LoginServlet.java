@@ -45,6 +45,9 @@ public class LoginServlet extends HttpServlet {
             resp.addCookie(cookie);
             HttpSession session = req.getSession();
             session.setAttribute("username",username);
+            if (username.equals("123")){
+                root.put("message","m");
+            }
             helper.render(req, resp, "profile.ftl", root);
             // исправить,добавить root
         }

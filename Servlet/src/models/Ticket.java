@@ -9,17 +9,20 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return id.equals(ticket.id) &&
-                departurePlace.equals(ticket.departurePlace) &&
-                arrivalPlace.equals(ticket.arrivalPlace) &&
-                company.equals(ticket.company) &&
-                departureTime.equals(ticket.departureTime) &&
-                arrivalTime.equals(ticket.arrivalTime);
+        return Objects.equals(id, ticket.id) &&
+                Objects.equals(departurePlace, ticket.departurePlace) &&
+                Objects.equals(arrivalPlace, ticket.arrivalPlace) &&
+                Objects.equals(company, ticket.company) &&
+                Objects.equals(departureTime, ticket.departureTime) &&
+                Objects.equals(arrivalTime, ticket.arrivalTime) &&
+                Objects.equals(day, ticket.day) &&
+                Objects.equals(price, ticket.price) &&
+                Objects.equals(link, ticket.link);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, departurePlace, arrivalPlace, company, departureTime, arrivalTime);
+        return Objects.hash(id, departurePlace, arrivalPlace, company, departureTime, arrivalTime, day, price, link);
     }
 
     private Long id;
@@ -28,19 +31,25 @@ public class Ticket {
     private String company;
     private String departureTime;
     private String arrivalTime;
+    private String day;
+    private String price;
+    private String link;
 
-    public Ticket(Long id, String departurePlace, String arrivalPlace, String company, String departureTime, String arrivalTime) {
+    public Ticket(Long id, String departurePlace, String arrivalPlace, String company, String departureTime, String arrivalTime, String day, String price, String link) {
         this.id = id;
         this.departurePlace = departurePlace;
         this.arrivalPlace = arrivalPlace;
         this.company = company;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
+        this.day = day;
+        this.price = price;
+        this.link = link;
     }
 
     public static Ticket from(TicketFormData ticketFormData) {
         return new Ticket(ticketFormData.getId(),ticketFormData.getDeparturePlace(),ticketFormData.getArrivalPlace(),
-                ticketFormData.getCompany(),ticketFormData.getDepartureTime(),ticketFormData.getArrivalTime());
+                ticketFormData.getCompany(),ticketFormData.getDepartureTime(),ticketFormData.getArrivalTime(),ticketFormData.getDay(),ticketFormData.getPrice(),ticketFormData.getLink());
     }
 
     @Override
@@ -52,6 +61,9 @@ public class Ticket {
                 ", company='" + company + '\'' +
                 ", departureTime='" + departureTime + '\'' +
                 ", arrivalTime='" + arrivalTime + '\'' +
+                ", day='" + day + '\'' +
+                ", price='" + price + '\'' +
+                ", link='" + link + '\'' +
                 '}';
     }
 
@@ -103,5 +115,29 @@ public class Ticket {
 
     public void setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }
