@@ -44,9 +44,6 @@
 
 </head>
 <body class="main">
-<#if message?has_content>
-    <p>${message}</p>
-</#if>
     <form method="post" action="/main">
         <h1  class = "head"><big><big><big><big>Поиск авиабилетов</big></big></big></big></h1>
 <#--        <input type="submit" name="start" value="SIGN IN" class="start"/>-->

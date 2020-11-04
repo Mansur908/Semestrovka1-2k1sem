@@ -5,15 +5,11 @@ import repositories.Singleton;
 import repositories.UsersRepository;
 import repositories.UsersRepositoryJdbcImpl;
 import services.Helper;
-import services.LoginService;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
@@ -21,14 +17,14 @@ import java.util.*;
 @WebServlet("/reg")
 public class RegServlet extends HttpServlet {
     private Helper helper;
-    private LoginService loginService;
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         helper.render(req, resp, "registration.ftl",new HashMap<>());
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         resp.setContentType("text/html");
@@ -40,17 +36,21 @@ public class RegServlet extends HttpServlet {
             helper.render(req, resp, "login.ftl", root);
             usersRepository.insertUser(username, password);
         } else {
-            root.put("message", "You already have account");
-            helper.render(req, resp, "login.ftl", root);
+            if (user.getUsername() == ""){
+                root.put("message", "Enter login and password");
+                helper.render(req, resp, "registration.ftl", root);
+            }
+            else {
+                root.put("message", "Username already exists");
+                helper.render(req, resp, "registration.ftl", root);
+            }
         }
     }
 
-    private Connection connection;
     private UsersRepository usersRepository;
     @Override
     public void init()  {
         helper = new Helper();
-        loginService = new LoginService();
 
         try{
             Connection connection = Singleton.getSingleton().doSinglton();

@@ -2,7 +2,6 @@ package servlets;
 
 import filters.AuthFilter;
 import services.Helper;
-import services.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +13,7 @@ import java.util.Map;
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
     private Helper helper;
-    private LoginService loginService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> root = new HashMap<>();
@@ -55,6 +54,5 @@ public class ProfileServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         helper = new Helper();
-        loginService = new LoginService();
     }
 }

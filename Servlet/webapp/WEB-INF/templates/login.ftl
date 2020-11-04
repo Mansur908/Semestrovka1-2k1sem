@@ -7,7 +7,7 @@
     <style>
         .main{
             margin:0px 0px;
-            background-image:url("/images/back.jpg");
+            background-image:url("/images/back3.jpg");
             background-size:100%;
         }
         .login{
@@ -81,12 +81,11 @@
     <form method="post" action="/login">
         <h2 class="sign">SIGN IN</h2>
         <#if message?has_content>
-            <p class="message" ><font color="red">${message}</font></p>
+            <p class="message" ><font color="red"><b>${message}</b></font></p>
         </#if>
         <input type="text" name="username" placeholder="enter login" class="name"/>
         <input type="password" name="password" placeholder="enter password" class="password"/>
         <input type="submit" value="ENTER" class="enter"/>
-<#--        <input type="submit" name="reg" value="REGISTRATION" class="reg"/>-->
         <a href="http://localhost:8080/reg">
             <button type="button" class="reg">REGISTRATION</button>
         </a>

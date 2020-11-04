@@ -69,7 +69,6 @@ public class TicketRepositoryImpl implements TicketRepository {
             statement.setString(8,link);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                System.out.println(true);
                 Long id = resultSet.getLong("id");
                 Ticket ticket = new Ticket(id, departurePlace, arrivalPlace, company, departureTime, arrivalTime,day,price,link);
                 return ticket;

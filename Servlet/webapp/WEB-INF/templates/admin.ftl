@@ -10,7 +10,7 @@
             background-image:url("/images/back.jpg");
             background-size:100%;
         }
-        .login{
+        .addTicket{
             margin:80px 500px;
             width:300px;
             height:460px;
@@ -18,7 +18,7 @@
             border-radius:10px;
             background-color:transparent;
         }
-        .name{
+        .company{
             text-align:center;
             margin:15px 50px 5px;
             width:200px;
@@ -48,7 +48,7 @@
             border-radius:10px;
             background-color:transparent
         }
-        .sign{
+        .head{
             margin:0px;
             text-align:center;
             color:#ffffff
@@ -77,13 +77,13 @@
 <a href="http://localhost:8080/profile">
     <button type="button" class="exit">home</button>
 </a>
-<div class = "login">
+<div class = "addTicket">
     <form method="post" action="/admin">
-        <h2 class="sign">ADD TICKET</h2>
+        <h2 class="head">ADD TICKET</h2>
         <#if message?has_content>
-            <p class="message" ><font color="red">${message}</font></p>
+            <p class="message" ><font color="red"><b>${message}</b></font></p>
         </#if>
-        <input type="text" name="com" placeholder="Company" class="name"/>
+        <input type="text" name="com" placeholder="Company" class="company"/>
         <input type="text" name="depP" placeholder="Departure place" class="password"/>
         <input type="text" name="ariP" placeholder="Arrival place" class="password"/>
         <input type="text" name="depT" placeholder="Departure time" class="password"/>

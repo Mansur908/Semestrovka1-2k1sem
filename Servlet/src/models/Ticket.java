@@ -1,7 +1,6 @@
 package models;
 
 import java.util.Objects;
-import dtos.TicketFormData;
 
 public class Ticket {
     @Override
@@ -45,11 +44,6 @@ public class Ticket {
         this.day = day;
         this.price = price;
         this.link = link;
-    }
-
-    public static Ticket from(TicketFormData ticketFormData) {
-        return new Ticket(ticketFormData.getId(),ticketFormData.getDeparturePlace(),ticketFormData.getArrivalPlace(),
-                ticketFormData.getCompany(),ticketFormData.getDepartureTime(),ticketFormData.getArrivalTime(),ticketFormData.getDay(),ticketFormData.getPrice(),ticketFormData.getLink());
     }
 
     @Override

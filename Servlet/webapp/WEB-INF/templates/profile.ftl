@@ -1,17 +1,9 @@
 <#ftl encoding="utf-8">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Profile</title>
+<#include "macros.ftl"/>
+<#macro content>
     <style>
         .main{
             margin:0px 0px;
-            /*background-image:url("/images/back.jpg");*/
             background: linear-gradient(100deg,#e55d87,#5fc3e4);
             background-size:100%;
         }
@@ -36,7 +28,17 @@
             background-color:transparent;
         }
         .change{
-            margin:17px 0px 0px 1000px;
+            text-align:center;
+            width:120px;
+            height:25px;
+            border:1px solid #ffffff;
+            outline:none;
+            color:#ffffff;
+            border-radius:10px;
+            background-color:transparent;
+        }
+        .mes{
+            margin:17px 0px 0px 870px;
             text-align:center;
             width:120px;
             height:25px;
@@ -72,19 +74,19 @@
             border-radius:10px;
         }
         .com{
-            margin:-130px 180px;
+            margin:-130px 190px;
         }
         .depT{
             margin:140px 50px;
         }
         .ariT{
-            margin:-167px 320px;
+            margin:-167px 360px;
         }
         .depP{
-            margin:170px 50px;
+            margin:175px 50px;
         }
         .ariP{
-            margin:-185px 320px;
+            margin:-193px 360px;
         }
         .from{
             text-align:center;
@@ -137,13 +139,17 @@
             background-color:#1f76ec;
             border-radius:0px 8px 8px 0px;
         }
-        .price{
-            margin:0px 480px;
+        .picture{
+            margin:150px 180px;
+            width:130px;
         }
     </style>
 </head>
 <body class="main">
 <form method="post" action="/profile">
+    <a href="http://localhost:8080/addmessage">
+        <button type="button" class="mes">messages</button>
+    </a>
     <a href="http://localhost:8080/change">
         <button type="button" class="change">change password</button>
     </a>
@@ -156,9 +162,9 @@
 </form>
 
 <div class ="search">
-    <p><input class="from" id="query" placeholder="Откуда" />
-        <input class="to" id="query1" placeholder="Куда"/>
-        <input class="day" id="query2" placeholder="Дата"/>
+    <p><input class="from" id="query" placeholder="Departure place" />
+        <input class="to" id="query1" placeholder="Arrival place"/>
+        <input class="day" id="query2" placeholder="Date"/>
         <input class="butt" type="submit" value="FIND" onclick="f()"/>>
     </p>
 </div>
@@ -173,8 +179,8 @@
                 if ( document.getElementById("ticket")){
                     document.getElementById("ticket").remove();
                 }
-                if (msg.length < 1){
-                    $("body").append("<div class='ticket' id='ticket'\n"+
+                if ((msg.length < 1) || (msg.length === 1 && msg[0].company === "")){
+                    $("body").append("<div class='ticket' id='ticket'>\n"+
                         "<div class=\"tickets\">\n" +
                         "<h3 class=\"notF\">NOT FOUND</h3>\n" +
                         "</div>\n" +
@@ -192,10 +198,8 @@
                             "<p><h2 class=\"ariT\" >" + msg[i].arrivalTime + "</h2></p>\n" +
                             "<p class=\"depP\" >" + msg[i].departurePlace + "</p>\n" +
                             "<p class=\"ariP\" >" + msg[i].arrivalPlace + "</p>\n" +
-                            // "<p><h2 class=\"price\">" + msg[i].price + "rub</h2></p>\n" +
-
-
-                            "</div>");
+                            "<img class=\"picture\" src=\"images/ticket.png\"></img>\n"+
+                        "</div>");
                     }
                     $("body").append("</div>");
                 }
@@ -205,3 +209,8 @@
 </script>
 </body>
 </html>
+</#macro>
+<#macro title>
+    <title>Profile</title>
+</#macro>
+<@main/>

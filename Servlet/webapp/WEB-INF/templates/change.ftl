@@ -7,10 +7,21 @@
     <style>
         .main{
             margin:0px 0px;
-            background-image:url("/images/back.jpg");
+            background-image:url("/images/back1.jpg");
             background-size:100%;
         }
-        .login{
+        .mainPage{
+            margin:17px 0px 0px 1100px;
+            text-align:center;
+            width:120px;
+            height:25px;
+            border:1px solid #ffffff;
+            outline:none;
+            color:#ffffff;
+            border-radius:10px;
+            background-color:transparent;
+        }
+        .changeB{
             margin:200px 500px;
             width:300px;
             height:220px;
@@ -48,7 +59,7 @@
             border-radius:10px;
             background-color:transparent
         }
-        .sign{
+        .head{
             margin:0px;
             text-align:center;
             color:#ffffff
@@ -60,11 +71,14 @@
     </style>
 </head>
 <body class="main">
-<div class = "login">
+<a href="http://localhost:8080/profile">
+    <button type="button" class="mainPage">main</button>
+</a>
+<div class = "changeB">
     <form method="post" action="/change">
-        <h2 class="sign">CHANGE PASSWORD</h2>
+        <h2 class="head">CHANGE PASSWORD</h2>
         <#if message?has_content>
-            <p class="message" ><font color="red">${message}</font></p>
+            <p class="message" ><font color="red"><b>${message}</b></font></p>
         </#if>
         <input type="text" name="old" placeholder="enter password" class="old"/>
         <input type="password" name="new" placeholder="enter new password" class="new"/>

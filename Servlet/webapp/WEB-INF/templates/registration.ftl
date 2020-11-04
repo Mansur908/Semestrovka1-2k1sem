@@ -7,10 +7,10 @@
     <style>
         .main{
             margin:0px 0px;
-            background-image:url("/images/back.jpg");
+            background-image:url("/images/back2.jpg");
             background-size:100%;
         }
-        .login{
+        .regB{
             margin:200px 500px;
             width:300px;
             height:220px;
@@ -48,7 +48,7 @@
             border-radius:10px;
             background-color:transparent
         }
-        .sign{
+        .head{
             margin:0px;
             text-align:center;
             color:#ffffff
@@ -60,19 +60,15 @@
     </style>
 </head>
 <body class="main">
-<div class = "login">
+<div class = "regB">
     <form method="post" action="/reg">
-        <h2 class="sign">REGISTRATION</h2>
+        <h2 class="head">REGISTRATION</h2>
         <#if message?has_content>
-            <p class="message" ><font color="red">${message}</font></p>
+            <p class="message" ><font color="red"><b>${message}</b></font></p>
         </#if>
         <input type="text" name="username" placeholder="enter login" class="name"/>
         <input type="password" name="password" placeholder="enter password" class="password"/>
         <input type="submit" value="ENTER" class="enter"/>
-
-<#--        <a href="http://localhost:8080/login">-->
-<#--            <button type="button" class="enter">ENTER</button>-->
-<#--        </a>-->
     </form>
 </div>
 </body>

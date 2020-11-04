@@ -1,22 +1,18 @@
 package servlets;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Ticket;
 import repositories.Singleton;
 import repositories.TicketRepository;
 import repositories.TicketRepositoryImpl;
 import services.Helper;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("/admin")
@@ -25,12 +21,12 @@ public class AdminServlet  extends HttpServlet {
     private TicketRepository ticketRepository;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         helper.render(req, resp, "admin.ftl",new HashMap<>());
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String company = req.getParameter("com");
         String departureP = req.getParameter("depP");
         String arrivalP = req.getParameter("ariP");
@@ -62,7 +58,7 @@ public class AdminServlet  extends HttpServlet {
     }
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         helper = new Helper();
 
         try{

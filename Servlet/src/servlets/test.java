@@ -1,14 +1,9 @@
 package servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dtos.TicketFormData;
-import models.Ticket;
-import repositories.Singleton;
 import repositories.TicketRepository;
 import repositories.UsersRepository;
-import repositories.UsersRepositoryJdbcImpl;
 import services.Helper;
-import services.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @WebServlet("/start")
 public class test extends HttpServlet {
@@ -30,7 +22,7 @@ public class test extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        helper.render(req, resp, "tickets.ftl", new HashMap<>());
+        helper.render(req, resp, "messages.ftl", new HashMap<>());
     }
 
     private Connection connection;
