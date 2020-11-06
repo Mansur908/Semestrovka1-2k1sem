@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class Singleton {
     private static Singleton singleton;
-    private static UsersRepository usersRepository;
     private static Connection connection;
 
     public static Singleton getSingleton(){

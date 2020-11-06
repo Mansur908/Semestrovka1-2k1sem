@@ -8,12 +8,14 @@ public class Message {
     private String username;
     private String mes;
     private String date;
+    private Boolean egualCookie;
 
     public Message(Long id, String username, String message, String date) {
         this.id = id;
         this.username = username;
         this.mes = message;
         this.date = date;
+        this.egualCookie = false;
     }
 
     @Override
@@ -39,6 +41,7 @@ public class Message {
                 ", username='" + username + '\'' +
                 ", mes='" + mes + '\'' +
                 ", date='" + date + '\'' +
+                ", egualCookie=" + egualCookie +
                 '}';
     }
 
@@ -72,5 +75,13 @@ public class Message {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Boolean getEgualCookie() {
+        return egualCookie;
+    }
+
+    public void setEgualCookie(Boolean egualCookie) {
+        this.egualCookie = egualCookie;
     }
 }

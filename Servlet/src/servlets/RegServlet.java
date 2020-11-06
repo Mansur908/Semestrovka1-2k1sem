@@ -31,14 +31,15 @@ public class RegServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> root = new HashMap<>();
         User user = usersRepository.findByUsername(username);
-        if (user == null) {
-            root.put("message", "You are reristered");
-            helper.render(req, resp, "login.ftl", root);
-            usersRepository.insertUser(username, password);
-        } else {
-            if (user.getUsername() == ""){
-                root.put("message", "Enter login and password");
-                helper.render(req, resp, "registration.ftl", root);
+        if (username == "" || password == ""){
+            root.put("message", "Enter login and password");
+            helper.render(req, resp, "registration.ftl", root);
+        }
+        else {
+            if (user == null) {
+                root.put("message", "You are reristered");
+                helper.render(req, resp, "login.ftl", root);
+                usersRepository.insertUser(username, password);
             }
             else {
                 root.put("message", "Username already exists");

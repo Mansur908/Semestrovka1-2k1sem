@@ -35,13 +35,15 @@ public class AddMessageServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         Cookie[] cookie = req.getCookies();
         String username = null;
-        if (cookie != null) {
-            username = AuthFilter.getCookieValue(cookie);
-        }
-        if (username != null){
-            Date dateNow = new Date();
-            SimpleDateFormat formatNow = new SimpleDateFormat("dd.MM.yyyy' 'hh:mm");
-            messageRepository.insertMessage(username,mes,formatNow.format(dateNow));
+        if (mes.length() > 0 && (mes.charAt(0) != ' ')){
+            if (cookie != null) {
+                username = AuthFilter.getCookieValue(cookie);
+            }
+            if (username != null){
+                Date dateNow = new Date();
+                SimpleDateFormat formatNow = new SimpleDateFormat("dd.MM.yyyy' 'HH:mm");
+                messageRepository.insertMessage(username,mes,formatNow.format(dateNow));
+            }
         }
         helper.render(req, resp, "messages.ftl",new HashMap<>());
     }

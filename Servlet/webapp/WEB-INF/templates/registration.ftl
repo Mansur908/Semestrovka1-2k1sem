@@ -11,7 +11,7 @@
             background-size:100%;
         }
         .regB{
-            margin:200px 500px;
+            margin:160px 500px;
             width:300px;
             height:220px;
             border:1px solid #ffffff;
@@ -57,9 +57,23 @@
             margin:5px;
             text-align:center;
         }
+        .loginPage{
+            margin:17px 0px 0px 1100px;
+            text-align:center;
+            width:120px;
+            height:25px;
+            border:1px solid #ffffff;
+            outline:none;
+            color:#ffffff;
+            border-radius:10px;
+            background-color:transparent;
+        }
     </style>
 </head>
 <body class="main">
+<a href="http://localhost:8080/login">
+    <button type="button" class="loginPage">login</button>
+</a>
 <div class = "regB">
     <form method="post" action="/reg">
         <h2 class="head">REGISTRATION</h2>
