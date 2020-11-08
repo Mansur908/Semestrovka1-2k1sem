@@ -5,7 +5,7 @@
         .main{
             margin:0px 0px;
             background: linear-gradient(100deg,#e55d87,#5fc3e4);
-            background-size:100%;
+            background-size:120%;
         }
         .exit{
             text-align:center;
