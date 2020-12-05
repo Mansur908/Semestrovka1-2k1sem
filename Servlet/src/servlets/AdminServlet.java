@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet("/admin")
 public class AdminServlet  extends HttpServlet {
@@ -38,23 +40,30 @@ public class AdminServlet  extends HttpServlet {
         Map<String, Object> root = new HashMap<>();
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
+        Pattern pattern = Pattern.compile("[0-9]");
+        Matcher matcher = pattern.matcher(departureP);
+        Pattern pattern1 = Pattern.compile("[a-z,а-я]");
+        Matcher matcher1 = pattern1.matcher(price);
         Ticket ticket = ticketRepository.findTicket(departureP,arrivalP,company,departureT,arrivalT,day,price);
-        if (ticket == null){
-            Ticket t = ticketRepository.insertTicket(departureP,arrivalP,company,departureT,arrivalT,day,price,link);
-            if (t == null){
-                root.put("message", "Ticket not insert");
-                helper.render(req, resp, "admin.ftl", root);
-            }
-            else {
-                root.put("message", "Ticket added");
-                helper.render(req, resp, "admin.ftl", root);
-            }
-        }
-        else {
-            root.put("message", "Ticket already exist");
+        if (matcher.find() || matcher1.find()){
+            root.put("message", "Incorrect format");
             helper.render(req, resp, "admin.ftl", root);
         }
-
+        else {
+            if (ticket == null) {
+                Ticket t = ticketRepository.insertTicket(departureP, arrivalP, company, departureT, arrivalT, day, price, link);
+                if (t == null) {
+                    root.put("message", "Ticket not insert");
+                    helper.render(req, resp, "admin.ftl", root);
+                } else {
+                    root.put("message", "Ticket added");
+                    helper.render(req, resp, "admin.ftl", root);
+                }
+            } else {
+                root.put("message", "Ticket already exist");
+                helper.render(req, resp, "admin.ftl", root);
+            }
+        }
     }
 
     @Override

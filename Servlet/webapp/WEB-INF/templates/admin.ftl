@@ -86,9 +86,9 @@
         <input type="text" name="com" placeholder="Company" class="company"/>
         <input type="text" name="depP" placeholder="Departure place" class="password"/>
         <input type="text" name="ariP" placeholder="Arrival place" class="password"/>
-        <input type="text" name="depT" placeholder="Departure time" class="password"/>
-        <input type="text" name="ariT" placeholder="Arrival time" class="password"/>
-        <input type="text" name="day" placeholder="Day" class="password"/>
+        <input type="text" name="depT" pattern="[0,1,2][0-9]:[0-5][0-9]" placeholder="Departure time" class="password"/>
+        <input type="text" name="ariT" pattern="[0,1,2][0-9]:[0-5][0-9]" placeholder="Arrival time" class="password"/>
+        <input type="text" name="day" pattern="[1-2]*[0-9]\.[0-1][0-9]\.[2][0-9][0-9][0-9]" placeholder="Day" class="password"/>
         <input type="text" name="price" placeholder="Price" class="password"/>
         <input type="text" name="link" placeholder="Link" class="password"/>
         <input type="submit" value="ENTER" class="enter"/>

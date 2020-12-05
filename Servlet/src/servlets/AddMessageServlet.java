@@ -11,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -23,13 +24,14 @@ public class AddMessageServlet extends HttpServlet {
     private Helper helper;
     private MessageRepository messageRepository;
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         helper.render(req, resp, "messages.ftl",new HashMap<>());
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String mes = req.getParameter("message");
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
@@ -45,7 +47,8 @@ public class AddMessageServlet extends HttpServlet {
                 messageRepository.insertMessage(username,mes,formatNow.format(dateNow));
             }
         }
-        helper.render(req, resp, "messages.ftl",new HashMap<>());
+//        helper.render(req, resp, "messages.ftl",new HashMap<>());
+        resp.sendRedirect("/addmessage");
     }
 
     @Override

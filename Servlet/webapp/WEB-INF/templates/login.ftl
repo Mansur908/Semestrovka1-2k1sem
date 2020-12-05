@@ -83,7 +83,7 @@
         <#if message?has_content>
             <p class="message" ><font color="red"><b>${message}</b></font></p>
         </#if>
-        <input type="text" name="username" placeholder="enter login" class="name"/>
+        <input id="login1" type="text" name="username" placeholder="enter login" class="name"/>
         <input type="password" name="password" placeholder="enter password" class="password"/>
         <input type="submit" value="ENTER" class="enter"/>
         <a href="http://localhost:8080/reg">
@@ -91,5 +91,11 @@
         </a>
     </form>
 </div>
+<script type="text/javascript">
+    function max() {
+        document.getElementById('login1').setAttribute("maxlength","12");
+    }
+    max()
+</script>
 </body>
 </html>

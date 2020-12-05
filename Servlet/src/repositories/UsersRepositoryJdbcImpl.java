@@ -19,7 +19,7 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     private static final String SQL_SELECT_BY_USERNAME = "select * from users where username = ?";
 
     //language=SQL
-    private static final String SQL_INSERT_USER = "INSERT INTO users (username,password) VALUES (?, ?)";
+    private static final String SQL_INSERT_USER = "INSERT INTO users (username,password) VALUES (?, ?) returning id,username, password";
 
     //language=SQL
     private static final String SQL_UPDATE_USER = "UPDATE users SET password = (?) " +
@@ -101,7 +101,7 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
                 Long id = resultSet.getLong("id");
                 return new User(id,username,password);
             }
-            return null;
+            return new User((long) 0,"","");
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }

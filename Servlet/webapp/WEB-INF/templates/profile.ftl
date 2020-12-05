@@ -162,8 +162,14 @@
 </form>
 
 <div class ="search">
-    <p><input class="from" id="query" placeholder="Departure place" />
-        <input class="to" id="query1" placeholder="Arrival place"/>
+    <p><input list="city" class="from" id="query" placeholder="Departure place"/>
+        <datalist id="city">
+            <option>Moscow</option>
+            <option>Kazan</option>
+            <option>Saint Petersburg</option>
+            <option>New York</option>
+        </datalist>
+        <input list="city" class="to" id="query1" placeholder="Arrival place"/>
         <input class="day" id="query2" placeholder="Date"/>
         <input class="butt" type="submit" value="FIND" onclick="f()"/>>
     </p>
